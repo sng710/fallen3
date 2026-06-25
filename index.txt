@@ -40,9 +40,9 @@
     z-index: 1;
     pointer-events: none;
     background:
-      radial-gradient(circle at 82% 10%, rgba(224,189,115,0.24), transparent 34%),
-      radial-gradient(circle at 16% 28%, rgba(117,135,83,0.16), transparent 32%),
-      linear-gradient(135deg, rgba(255,252,244,0.86), rgba(247,240,226,0.64));
+      radial-gradient(circle at 82% 10%, rgba(224,189,115,0.12), transparent 34%),
+      radial-gradient(circle at 16% 28%, rgba(117,135,83,0.08), transparent 32%),
+      linear-gradient(135deg, rgba(255,252,244,0.30), rgba(247,240,226,0.16));
   }
 
   /* Soft field background */
@@ -51,7 +51,9 @@
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    background: linear-gradient(160deg, #f5ecd9, #e7dec8);
+    background:
+      linear-gradient(160deg, rgba(245,236,217,0.55), rgba(231,222,200,0.55)),
+      url('./field_poster.jpg') center / cover no-repeat;
   }
 
   .video-bg video {
@@ -61,8 +63,14 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    filter: brightness(1.14) saturate(0.86) contrast(0.86) blur(0.2px);
-    opacity: 0.44;
+    filter: brightness(1.08) saturate(0.92) contrast(0.92) blur(0.1px);
+    opacity: 0.82;
+    transform: translateZ(0);
+  }
+
+  html.video-paused .video-bg video,
+  html.video-error .video-bg video {
+    opacity: 0;
   }
 
   .video-overlay {
@@ -71,8 +79,8 @@
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(to bottom, rgba(255,250,239,0.82) 0%, rgba(255,250,239,0.52) 42%, rgba(247,240,226,0.88) 100%),
-      repeating-linear-gradient(90deg, rgba(96,78,34,0.028) 0 1px, transparent 1px 5px);
+      linear-gradient(to bottom, rgba(255,250,239,0.34) 0%, rgba(255,250,239,0.10) 42%, rgba(247,240,226,0.42) 100%),
+      repeating-linear-gradient(90deg, rgba(96,78,34,0.018) 0 1px, transparent 1px 5px);
   }
 
   .content {
@@ -664,7 +672,10 @@
 <body>
 
 <div class="video-bg" aria-hidden="true">
-  <video autoplay muted loop playsinline src="field.mp4"></video>
+  <video id="bgVideo" autoplay muted defaultmuted loop playsinline webkit-playsinline preload="auto" poster="./field_poster.jpg">
+    <source src="./field.webm?v=2" type="video/webm">
+    <source src="./field.mp4?v=2" type="video/mp4">
+  </video>
 </div>
 <div class="video-overlay" aria-hidden="true"></div>
 
@@ -731,6 +742,51 @@
     </div>
   </section>
 </div>
+
+
+<script>
+(function () {
+  const video = document.getElementById('bgVideo');
+  if (!video) return;
+
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+
+  const tryPlay = () => {
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        document.documentElement.classList.add('video-paused');
+      });
+    }
+  };
+
+  video.addEventListener('playing', () => {
+    document.documentElement.classList.remove('video-paused', 'video-error');
+  });
+
+  video.addEventListener('error', () => {
+    document.documentElement.classList.add('video-error');
+  });
+
+  if (video.readyState >= 2) {
+    tryPlay();
+  } else {
+    video.addEventListener('canplay', tryPlay, { once: true });
+  }
+
+  window.addEventListener('load', tryPlay, { once: true });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) tryPlay();
+  });
+  document.addEventListener('click', tryPlay, { once: true });
+  document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+})();
+</script>
 
 <script>
 const people = [
@@ -4812,16 +4868,41 @@ const detailLabels = [
 
 heroCount.textContent = `${people.length} נשמות יקרות`;
 
+function getPersonalPhoto(person) {
+  /*
+    Important: familyGroupPhoto is a shared group/couple image.
+    It should NOT be used as the personal image for every member of the same family.
+    Personal cards now use only the private image path from `photo`, for example:
+    images/people-original/person-055.jpg
+  */
+  const personal = String(person.photo || '').trim();
+  if (personal && !personal.includes('/family-groups/')) return personal;
+
+  const display = String(person.displayPhoto || '').trim();
+  const group = String(person.familyGroupPhoto || '').trim();
+  if (display && display !== group && !display.includes('/family-groups/')) return display;
+
+  return '';
+}
+
+function photoWithFallback(src, alt, fallbackSvg, extraAttrs = '') {
+  return `
+    <img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" ${extraAttrs}
+      onerror="this.hidden=true; this.nextElementSibling.hidden=false; this.closest('.has-photo')?.classList.remove('has-photo');">
+    <span class="image-fallback" hidden>${fallbackSvg}</span>`;
+}
+
 grid.innerHTML = people.map((person, index) => {
   const displayName = stripZl(person.name);
-  const hasPhoto = Boolean(person.displayPhoto);
+  const personalPhoto = getPersonalPhoto(person);
+  const hasPhoto = Boolean(personalPhoto);
   const thumb = hasPhoto
-    ? `<img src="${escapeHtml(person.displayPhoto)}" alt="${escapeHtml(person.displayPhotoAlt || person.familyGroupTitle || person.name)}" loading="lazy">`
+    ? photoWithFallback(personalPhoto, person.displayPhotoAlt || person.name, wheatIcon(), 'loading="lazy"')
     : wheatIcon();
   const meta = [person.community, person.age ? `גיל ${person.age}` : ''].filter(Boolean)
     .map(item => `<span>${escapeHtml(item)}</span>`).join('');
   const role = person.role ? `<span class="card-role">${escapeHtml(person.role)}</span>` : '';
-  const label = hasPhoto ? `<span class="photo-label">יש תמונה</span>` : ``;
+  const label = hasPhoto ? `<span class="photo-label">תמונה אישית</span>` : ``;
   return `
     <button type="button" class="name-card ${hasPhoto ? 'has-photo' : ''}" data-index="${index}" aria-label="פתיחת מידע נוסף על ${escapeHtml(displayName)}">
       <span class="thumb">${thumb}</span>
@@ -4880,8 +4961,13 @@ function openPerson(index) {
     modalRelated.innerHTML = '';
   }
 
-  if (person.displayPhoto) {
-    modalMedia.innerHTML = `<img src="${escapeHtml(person.displayPhoto)}" alt="${escapeHtml(person.displayPhotoAlt || person.familyGroupTitle || displayName)}">`;
+  const personalPhoto = getPersonalPhoto(person);
+  if (personalPhoto) {
+    modalMedia.innerHTML = photoWithFallback(
+      personalPhoto,
+      person.displayPhotoAlt || person.name || displayName,
+      wheatIcon('modal-wheat')
+    );
   } else {
     modalMedia.innerHTML = wheatIcon('modal-wheat');
   }

@@ -1,0 +1,1 @@
+Upload private personal images here using the exact filenames from data.json, for example person-055.jpg, person-058.jpg, person-059.jpg, person-056.jpg, person-057.jpg. Family-group images are kept separately under images/family-groups/.
