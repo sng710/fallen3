@@ -1,11 +1,13 @@
-GitHub Pages package — fixed floating cards layout
+Fallen3 updated code — family-groups-cache-20260625-1538
 
-Upload all files in this folder to the root of the fallen3 repository.
-This version fixes card overlap and improves the title readability while keeping the video visible.
+Upload index.html to the root of the fallen3 GitHub Pages repository.
 
-Important paths:
-- index.html
-- field.webm
-- field.mp4
-- field_poster.jpg
-- images/people-original/ for private portraits
+Important:
+- This package intentionally does NOT include field.mp4, field.webm, images, or field_poster.jpg so it will not overwrite your updated video or photos.
+- The HTML now uses only ./field.mp4?v=family-groups-cache-20260625-1538. The old field.webm source was removed because browsers loaded it before the mp4, which could show the previous video.
+- Keep your current folders in GitHub:
+  images/people-original/
+  images/family-groups/
+  field.mp4
+
+To force refresh after uploading: open https://sng710.github.io/fallen3/?v=family-groups-cache-20260625-1538 and press Ctrl+F5.

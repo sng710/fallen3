@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>כולנו רקמה אנושית אחת חיה</title>
+<!-- build: family-groups-cache-20260625-1538 -->
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -46,7 +50,7 @@
     position: absolute;
     inset: -3%;
     z-index: 0;
-    background: url('./field_poster.jpg?v=floating-layout-20260625-2') center / cover no-repeat;
+    background: radial-gradient(circle at 18% 18%, rgba(255,235,184,.40), transparent 34%), linear-gradient(135deg, #e7d8ad 0%, #aab16f 44%, #647044 100%);
     transform: translate3d(0,0,0) scale(1.04);
     animation: fieldDrift 18s ease-in-out infinite alternate;
   }
@@ -520,16 +524,137 @@
     .person-node.is-leaving { transform: translateY(-12px) scale(.96); }
   }
 
+
+
+  /* family-groups-cache-20260625-1538: family-grouped layout, cache-pushed assets, shared image matte */
+  :root {
+    --image-matte: #efe6d2;
+    --image-matte-deep: #e4d7bd;
+  }
+
+  .video-bg {
+    background: radial-gradient(circle at 30% 18%, #eadfbd, #c5b985 34%, #808b5c 70%, #4f6042 100%) !important;
+  }
+
+  .video-bg::before {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(255,235,184,.40), transparent 34%),
+      radial-gradient(circle at 76% 42%, rgba(116,139,84,.34), transparent 38%),
+      linear-gradient(135deg, #e7d8ad 0%, #aab16f 44%, #647044 100%) !important;
+    opacity: .72;
+  }
+
+  .video-bg video {
+    opacity: .98 !important;
+    filter: brightness(1.10) saturate(1.10) contrast(1.03) !important;
+  }
+
+  .top-poem {
+    background: linear-gradient(180deg, rgba(255,253,247,.74), rgba(255,248,234,.52)) !important;
+    border-color: rgba(185,139,48,.36) !important;
+    box-shadow: 0 18px 54px rgba(36, 28, 13, .20), inset 0 0 0 1px rgba(255,255,255,.40) !important;
+  }
+
+  .top-poem h1 {
+    color: #201a10 !important;
+    text-shadow: 0 1px 0 rgba(255,255,255,.96), 0 12px 30px rgba(34,25,10,.22) !important;
+  }
+
+  .people-layer {
+    grid-auto-flow: row;
+    grid-auto-rows: minmax(130px, 1fr);
+    align-content: center;
+  }
+
+  .portrait-frame {
+    background: var(--image-matte) !important;
+    border-color: rgba(171,128,43,.34) !important;
+  }
+
+  .portrait-frame::after {
+    border-color: rgba(255,255,255,.50) !important;
+  }
+
+  .portrait-frame img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: var(--image-matte) !important;
+    filter: none !important;
+  }
+
+  .portrait-placeholder {
+    background: var(--image-matte) !important;
+  }
+
+  .modal-media {
+    background: var(--image-matte) !important;
+    overflow: hidden;
+  }
+
+  .modal-media img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    background: var(--image-matte) !important;
+    filter: none !important;
+  }
+
+  .chip-list button.related-person {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .chip-list li:has(button.related-person) {
+    transition: transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+
+  .chip-list li:has(button.related-person):hover,
+  .chip-list li:has(button.related-person):focus-within {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,.92);
+    border-color: rgba(187,141,50,.34);
+  }
+
+  @media (max-width: 620px) {
+    .people-layer {
+      grid-template-columns: repeat(2, minmax(86px, 1fr)) !important;
+      grid-template-rows: repeat(3, minmax(104px, 1fr)) !important;
+      grid-auto-rows: minmax(104px, 1fr);
+      inset: 112px 10px 16px !important;
+    }
+  }
+
 </style>
 </head>
 <body>
 <div class="video-bg" aria-hidden="true">
-  <video id="bgVideo" autoplay muted defaultmuted loop playsinline webkit-playsinline preload="metadata" poster="./field_poster.jpg?v=floating-layout-20260625-2">
-    <source src="./field.webm?v=floating-layout-20260625-2" type="video/webm">
-    <source src="./field.mp4?v=floating-layout-20260625-2" type="video/mp4">
+  <video id="bgVideo" autoplay muted defaultmuted loop playsinline webkit-playsinline preload="auto">
+    <source src="./field.mp4?v=family-groups-cache-20260625-1538" type="video/mp4">
   </video>
 </div>
 <div class="video-tint" aria-hidden="true"></div>
+
+<script>
+  window.FALLEN3_BUILD_VERSION = "family-groups-cache-20260625-1538";
+  try {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        registrations.forEach(function(registration) { registration.unregister(); });
+      }).catch(function() {});
+    }
+    if ("caches" in window) {
+      caches.keys().then(function(keys) { keys.forEach(function(key) { caches.delete(key); }); }).catch(function() {});
+    }
+  } catch (_) {}
+</script>
+
 
 <main class="memory-page" aria-label="שביל זיכרון">
   <header class="top-poem" aria-label="כותרת זיכרון">
@@ -602,7 +727,8 @@
   const modalRelated = document.getElementById('modalRelated');
   const relatedBox = document.getElementById('relatedBox');
   let lastFocus = null;
-  let startIndex = 0;
+  let pageIndex = 0;
+  let groupedPages = [];
   let cycleTimer = null;
   let resizeTimer = null;
   let transitionTimer = null;
@@ -628,10 +754,11 @@
   ];
 
   const MOBILE_SLOTS = [
-    { size: .72, float: 0 },
-    { size: .72, float: 0 },
     { size: .70, float: 0 },
-    { size: .70, float: 0 }
+    { size: .70, float: 0 },
+    { size: .68, float: 0 },
+    { size: .68, float: 0 },
+    { size: .66, float: 0 }
   ];
 
   const text = (value) => value == null ? '' : String(value).trim();
@@ -660,14 +787,22 @@
 
   const displayName = (person) => cleanName(person.excelDisplayName || person.displayName || fallbackFirstNameFirst(person.name));
   const displayNameMap = new Map();
-  people.forEach(person => {
+  const personIndexMap = new Map();
+  people.forEach((person, index) => {
     const shown = displayName(person);
     [person.name, person.updatedExcelName, person.excelDisplayName, shown].forEach(key => {
       const cleaned = cleanName(key);
-      if (cleaned) displayNameMap.set(cleaned, shown);
+      if (cleaned) {
+        displayNameMap.set(cleaned, shown);
+        if (!personIndexMap.has(cleaned)) personIndexMap.set(cleaned, index);
+      }
     });
   });
   const displayRelatedName = (name) => displayNameMap.get(cleanName(name)) || fallbackFirstNameFirst(name);
+  const relatedPersonIndex = (name) => {
+    const cleaned = cleanName(name);
+    return personIndexMap.has(cleaned) ? personIndexMap.get(cleaned) : null;
+  };
 
   function slots() {
     if (window.matchMedia('(max-width: 620px)').matches) return MOBILE_SLOTS;
@@ -686,7 +821,7 @@
 
   function makePhoto(src, alt, eager, holderClass = 'portrait-frame') {
     const safeSrc = esc(src);
-    const img = safeSrc ? `<img src="${safeSrc}?v=floating-layout-20260625-2" alt="${esc(alt)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" onerror="this.closest('.${holderClass},.modal-media').classList.add('no-photo'); this.remove();">` : '';
+    const img = safeSrc ? `<img src="${safeSrc}?v=family-groups-cache-20260625-1538" alt="${esc(alt)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" onerror="this.closest('.${holderClass},.modal-media').classList.add('no-photo'); this.remove();">` : '';
     return `${img}<div class="portrait-placeholder">${wheatSvg()}</div>`;
   }
 
@@ -708,14 +843,70 @@
     return node;
   }
 
+  function personKey(person, fallbackIndex) {
+    return String(person && (person.id || person.name) || fallbackIndex);
+  }
+
+  function maxFamilySize() {
+    const counts = new Map();
+    people.forEach(person => {
+      const id = text(person.familyGroupId);
+      if (!id) return;
+      counts.set(id, (counts.get(id) || 0) + 1);
+    });
+    return Math.max(1, ...Array.from(counts.values()));
+  }
+
+  function buildGroupedPages(capacity) {
+    const pageCapacity = Math.max(capacity || slots().length || 1, maxFamilySize());
+    const used = new Set();
+    const familyUnits = [];
+    const singles = [];
+
+    people.forEach((person, index) => {
+      const key = personKey(person, index);
+      if (used.has(key)) return;
+      const familyId = text(person.familyGroupId);
+      if (familyId) {
+        const members = people
+          .map((member, memberIndex) => ({ person: member, index: memberIndex }))
+          .filter(({ person: member }) => text(member.familyGroupId) === familyId);
+        members.forEach(({ person: member, index: memberIndex }) => used.add(personKey(member, memberIndex)));
+        familyUnits.push({ familyId, members });
+      } else {
+        used.add(key);
+        singles.push({ person, index });
+      }
+    });
+
+    const pages = [];
+    const singleQueue = singles.slice();
+
+    familyUnits.forEach(unit => {
+      const page = unit.members.slice(0);
+      while (page.length < pageCapacity && singleQueue.length) page.push(singleQueue.shift());
+      pages.push(page);
+    });
+
+    while (singleQueue.length) {
+      const page = [];
+      while (page.length < pageCapacity && singleQueue.length) page.push(singleQueue.shift());
+      pages.push(page);
+    }
+
+    return pages.length ? pages : [people.map((person, index) => ({ person, index })).slice(0, pageCapacity)];
+  }
+
   function renderFloatingPeople(instant = false) {
     window.clearTimeout(transitionTimer);
     const activeSlots = slots();
+    groupedPages = buildGroupedPages(activeSlots.length);
+    if (pageIndex >= groupedPages.length) pageIndex = 0;
+    const page = groupedPages[pageIndex] || [];
     layer.replaceChildren();
-    activeSlots.forEach((slot, offset) => {
-      const index = (startIndex + offset) % people.length;
-      const person = people[index];
-      const node = renderNode(person, index, slot, offset);
+    page.forEach((ref, slotIndex) => {
+      const slot = activeSlots[slotIndex] || activeSlots[activeSlots.length - 1] || { size: .78, float: 0 };
+      const node = renderNode(ref.person, ref.index, slot, slotIndex);
       layer.appendChild(node);
       if (instant) node.classList.add('is-visible');
       else requestAnimationFrame(() => window.setTimeout(() => node.classList.add('is-visible'), 30));
@@ -724,7 +915,6 @@
 
   function advancePeople() {
     if (modal.classList.contains('is-open')) return;
-    const activeSlots = slots();
     const oldNodes = Array.from(layer.querySelectorAll('.person-node'));
     oldNodes.forEach((node, index) => {
       node.style.setProperty('--delay', (index * 70) + 'ms');
@@ -732,7 +922,9 @@
       node.classList.remove('is-visible');
     });
     transitionTimer = window.setTimeout(() => {
-      startIndex = (startIndex + activeSlots.length) % people.length;
+      const activeSlots = slots();
+      groupedPages = buildGroupedPages(activeSlots.length);
+      pageIndex = groupedPages.length ? (pageIndex + 1) % groupedPages.length : 0;
       renderFloatingPeople(false);
     }, 1250);
   }
@@ -791,7 +983,12 @@
 
     const related = Array.isArray(person.familyGroupMembers) ? person.familyGroupMembers.filter(Boolean) : [];
     relatedBox.hidden = related.length === 0;
-    modalRelated.innerHTML = related.map(item => `<li>${esc(displayRelatedName(item))}</li>`).join('');
+    modalRelated.innerHTML = related.map(item => {
+      const relatedIndex = relatedPersonIndex(item);
+      const shownName = esc(displayRelatedName(item));
+      if (relatedIndex === null || relatedIndex === undefined) return `<li>${shownName}</li>`;
+      return `<li><button type="button" class="related-person" data-related-index="${relatedIndex}" aria-label="פתיחת מידע על ${shownName}">${shownName}</button></li>`;
+    }).join('');
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -826,6 +1023,14 @@
 
   modal.addEventListener('click', (event) => {
     if (event.target.matches('[data-close-modal]')) closeModal();
+  });
+
+  modalRelated.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-related-index]');
+    if (!button) return;
+    event.preventDefault();
+    const index = Number(button.dataset.relatedIndex);
+    if (Number.isFinite(index)) openPerson(index);
   });
 
   document.addEventListener('keydown', (event) => {
