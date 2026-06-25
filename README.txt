@@ -1,8 +1,13 @@
-GitHub Pages upload notes:
+GitHub Pages ready package
 
-1. Upload the CONTENTS of this folder to the root of the fallen3 repository.
-2. Main file must be named index.html.
-3. Keep field.webm, field.mp4 and field_poster.jpg next to index.html.
-4. Private/person photos should be uploaded to images/people-original/ with the exact filenames from data.json, for example person-055.jpg.
-5. Family group photos are included in images/family-groups/ but are not used as fallback for private cards.
-6. After upload, open https://sng710.github.io/fallen3/ and press Ctrl+F5.
+Upload the CONTENTS of this folder to the root of the fallen3 repository:
+- index.html
+- field.webm
+- field.mp4
+- field_poster.jpg
+- images/
+- .nojekyll
+
+People now float over the video and fade in/out, with no heartbeat line.
+Cards use only private portrait paths from data.json: images/people-original/person-XXX.jpg
+If a private portrait is missing, a wheat placeholder is shown.
