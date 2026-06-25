@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>כולנו רקמה אנושית אחת חיה</title>
-<!-- build: family-groups-cache-20260625-1538 -->
+<!-- build: blend-soft-cache-20260625-1655 -->
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -631,19 +631,93 @@
     }
   }
 
+
+  /* blend-soft-cache-20260625-1655: softer blended people treatment + clearer poem */
+  .top-poem {
+    background: linear-gradient(180deg, rgba(255,253,247,.80), rgba(255,248,234,.58)) !important;
+    border-color: rgba(185,139,48,.30) !important;
+    box-shadow: 0 18px 46px rgba(36, 28, 13, .18), inset 0 0 0 1px rgba(255,255,255,.45) !important;
+  }
+
+  .video-tint {
+    background:
+      radial-gradient(circle at 50% 8%, rgba(255,255,255,0.10), transparent 30%),
+      linear-gradient(to bottom, rgba(255,252,244,0.06), rgba(255,252,244,0.02) 44%, rgba(40,32,18,0.18));
+  }
+
+  .person-node.is-visible:not(.is-leaving) {
+    opacity: .94;
+  }
+
+  .person-button {
+    gap: 8px;
+  }
+
+  .portrait-frame {
+    background: linear-gradient(180deg, rgba(255,253,247,.36), rgba(239,230,210,.20)), rgba(239,230,210,.26) !important;
+    border-color: rgba(171,128,43,.22) !important;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.24),
+      0 8px 20px rgba(48, 37, 17, .13) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  .portrait-frame::after {
+    border-color: rgba(255,255,255,.26) !important;
+  }
+
+  .portrait-frame img {
+    background: var(--image-matte) !important;
+    opacity: .95;
+    filter: saturate(.94) contrast(.98) brightness(1.02) !important;
+  }
+
+  .person-name {
+    background: rgba(255,253,247,.42) !important;
+    border-color: rgba(185,139,48,.14) !important;
+    box-shadow: 0 8px 20px rgba(52,42,21,.10) !important;
+    backdrop-filter: blur(10px) saturate(.96);
+    -webkit-backdrop-filter: blur(10px) saturate(.96);
+  }
+
+  .person-name .zl {
+    color: rgba(138,102,27,.84);
+  }
+
+  .modal-media {
+    background: var(--image-matte) !important;
+  }
+
+  .modal-media img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    padding: 16px;
+    background: var(--image-matte) !important;
+  }
+
+  @media (max-width: 620px) {
+    .portrait-frame {
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 6px 16px rgba(48, 37, 17, .11) !important;
+    }
+    .person-name {
+      background: rgba(255,253,247,.46) !important;
+    }
+  }
+
 </style>
 </head>
 <body>
 <div class="video-bg" aria-hidden="true">
   <video id="bgVideo" autoplay muted defaultmuted loop playsinline webkit-playsinline preload="auto">
     <!-- MP4 only: no field.webm / field.webp fallback, so replacing field.mp4 changes the video. -->
-    <source src="./field.mp4?v=mp4-only-cache-20260625-1607" type="video/mp4">
+    <source src="./field.mp4?v=blend-soft-cache-20260625-1655" type="video/mp4">
   </video>
 </div>
 <div class="video-tint" aria-hidden="true"></div>
 
 <script>
-  window.FALLEN3_BUILD_VERSION = "mp4-only-cache-20260625-1607";
+  window.FALLEN3_BUILD_VERSION = "blend-soft-cache-20260625-1655";
   try {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -822,7 +896,7 @@
 
   function makePhoto(src, alt, eager, holderClass = 'portrait-frame') {
     const safeSrc = esc(src);
-    const img = safeSrc ? `<img src="${safeSrc}?v=family-groups-cache-20260625-1538" alt="${esc(alt)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" onerror="this.closest('.${holderClass},.modal-media').classList.add('no-photo'); this.remove();">` : '';
+    const img = safeSrc ? `<img src="${safeSrc}?v=blend-soft-cache-20260625-1655" alt="${esc(alt)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" onerror="this.closest('.${holderClass},.modal-media').classList.add('no-photo'); this.remove();">` : '';
     return `${img}<div class="portrait-placeholder">${wheatSvg()}</div>`;
   }
 
