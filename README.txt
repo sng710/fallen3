@@ -1,13 +1,11 @@
-GitHub Pages ready package
+GitHub Pages package — fixed floating cards layout
 
-Upload the CONTENTS of this folder to the root of the fallen3 repository:
+Upload all files in this folder to the root of the fallen3 repository.
+This version fixes card overlap and improves the title readability while keeping the video visible.
+
+Important paths:
 - index.html
 - field.webm
 - field.mp4
 - field_poster.jpg
-- images/
-- .nojekyll
-
-People now float over the video and fade in/out, with no heartbeat line.
-Cards use only private portrait paths from data.json: images/people-original/person-XXX.jpg
-If a private portrait is missing, a wheat placeholder is shown.
+- images/people-original/ for private portraits
