@@ -1,13 +1,15 @@
-Fallen3 updated code — family-groups-cache-20260625-1538
+GitHub Pages MP4-only cache-push version
 
-Upload index.html to the root of the fallen3 GitHub Pages repository.
+Build: mp4-only-cache-20260625-1607
+
+Upload index.html to the fallen3 repository root.
+Keep your new field.mp4 in the same repository root.
 
 Important:
-- This package intentionally does NOT include field.mp4, field.webm, images, or field_poster.jpg so it will not overwrite your updated video or photos.
-- The HTML now uses only ./field.mp4?v=family-groups-cache-20260625-1538. The old field.webm source was removed because browsers loaded it before the mp4, which could show the previous video.
-- Keep your current folders in GitHub:
-  images/people-original/
-  images/family-groups/
-  field.mp4
+- This version references ONLY: ./field.mp4?v=mp4-only-cache-20260625-1607
+- It does not reference field.webm, field.webp, or field_poster.jpg for the video background.
+- If your repository still has old field.webm / field.webp / field_poster.jpg files, they can stay, but this index.html will ignore them.
+- To be extra safe, you can delete old field.webm / field.webp / field_poster.jpg from GitHub.
 
-To force refresh after uploading: open https://sng710.github.io/fallen3/?v=family-groups-cache-20260625-1538 and press Ctrl+F5.
+Test URL:
+https://sng710.github.io/fallen3/?v=mp4-only-cache-20260625-1607

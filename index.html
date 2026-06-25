@@ -636,13 +636,14 @@
 <body>
 <div class="video-bg" aria-hidden="true">
   <video id="bgVideo" autoplay muted defaultmuted loop playsinline webkit-playsinline preload="auto">
-    <source src="./field.mp4?v=family-groups-cache-20260625-1538" type="video/mp4">
+    <!-- MP4 only: no field.webm / field.webp fallback, so replacing field.mp4 changes the video. -->
+    <source src="./field.mp4?v=mp4-only-cache-20260625-1607" type="video/mp4">
   </video>
 </div>
 <div class="video-tint" aria-hidden="true"></div>
 
 <script>
-  window.FALLEN3_BUILD_VERSION = "family-groups-cache-20260625-1538";
+  window.FALLEN3_BUILD_VERSION = "mp4-only-cache-20260625-1607";
   try {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
